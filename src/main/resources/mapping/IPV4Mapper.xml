@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.IPV4Mapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.IPV4" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+    <result column="priority" property="priority" jdbcType="INTEGER" />
+    <result column="rsv_tos" property="rsvTos" jdbcType="INTEGER" />
+    <result column="length" property="length" jdbcType="INTEGER" />
+    <result column="option" property="option" jdbcType="VARCHAR" />
+    <result column="dst_ip" property="dstIp" jdbcType="VARCHAR" />
+    <result column="src_ip" property="srcIp" jdbcType="VARCHAR" />
+    <result column="ident" property="ident" jdbcType="INTEGER" />
+    <result column="protocol" property="protocol" jdbcType="INTEGER" />
+    <result column="hop_limit" property="hopLimit" jdbcType="INTEGER" />
+    <result column="offset" property="offset" jdbcType="INTEGER" />
+    <result column="more_frag" property="moreFrag" jdbcType="BIT" />
+    <result column="dont_frag" property="dontFrag" jdbcType="BIT" />
+    <result column="sort_id" property="sortId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, version, priority, rsv_tos, length, option, dst_ip, src_ip, ident, protocol, 
+    hop_limit, offset, more_frag, dont_frag, sort_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.demo.entity.IPV4Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from ipv4
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ipv4
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ipv4
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.demo.entity.IPV4Example" >
+    delete from ipv4
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.IPV4" >
+    insert into ipv4 (id, version, priority, 
+      rsv_tos, length, option, 
+      dst_ip, src_ip, ident, 
+      protocol, hop_limit, offset, 
+      more_frag, dont_frag, sort_id)
+    values (#{id,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{priority,jdbcType=INTEGER}, 
+      #{rsvTos,jdbcType=INTEGER}, #{length,jdbcType=INTEGER}, #{option,jdbcType=VARCHAR}, 
+      #{dstIp,jdbcType=VARCHAR}, #{srcIp,jdbcType=VARCHAR}, #{ident,jdbcType=INTEGER}, 
+      #{protocol,jdbcType=INTEGER}, #{hopLimit,jdbcType=INTEGER}, #{offset,jdbcType=INTEGER}, 
+      #{moreFrag,jdbcType=BIT}, #{dontFrag,jdbcType=BIT}, #{sortId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.IPV4" >
+    insert into ipv4
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="priority != null" >
+        priority,
+      </if>
+      <if test="rsvTos != null" >
+        rsv_tos,
+      </if>
+      <if test="length != null" >
+        length,
+      </if>
+      <if test="option != null" >
+        option,
+      </if>
+      <if test="dstIp != null" >
+        dst_ip,
+      </if>
+      <if test="srcIp != null" >
+        src_ip,
+      </if>
+      <if test="ident != null" >
+        ident,
+      </if>
+      <if test="protocol != null" >
+        protocol,
+      </if>
+      <if test="hopLimit != null" >
+        hop_limit,
+      </if>
+      <if test="offset != null" >
+        offset,
+      </if>
+      <if test="moreFrag != null" >
+        more_frag,
+      </if>
+      <if test="dontFrag != null" >
+        dont_frag,
+      </if>
+      <if test="sortId != null" >
+        sort_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="rsvTos != null" >
+        #{rsvTos,jdbcType=INTEGER},
+      </if>
+      <if test="length != null" >
+        #{length,jdbcType=INTEGER},
+      </if>
+      <if test="option != null" >
+        #{option,jdbcType=VARCHAR},
+      </if>
+      <if test="dstIp != null" >
+        #{dstIp,jdbcType=VARCHAR},
+      </if>
+      <if test="srcIp != null" >
+        #{srcIp,jdbcType=VARCHAR},
+      </if>
+      <if test="ident != null" >
+        #{ident,jdbcType=INTEGER},
+      </if>
+      <if test="protocol != null" >
+        #{protocol,jdbcType=INTEGER},
+      </if>
+      <if test="hopLimit != null" >
+        #{hopLimit,jdbcType=INTEGER},
+      </if>
+      <if test="offset != null" >
+        #{offset,jdbcType=INTEGER},
+      </if>
+      <if test="moreFrag != null" >
+        #{moreFrag,jdbcType=BIT},
+      </if>
+      <if test="dontFrag != null" >
+        #{dontFrag,jdbcType=BIT},
+      </if>
+      <if test="sortId != null" >
+        #{sortId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.demo.entity.IPV4Example" resultType="java.lang.Integer" >
+    select count(*) from ipv4
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ipv4
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.version != null" >
+        version = #{record.version,jdbcType=INTEGER},
+      </if>
+      <if test="record.priority != null" >
+        priority = #{record.priority,jdbcType=INTEGER},
+      </if>
+      <if test="record.rsvTos != null" >
+        rsv_tos = #{record.rsvTos,jdbcType=INTEGER},
+      </if>
+      <if test="record.length != null" >
+        length = #{record.length,jdbcType=INTEGER},
+      </if>
+      <if test="record.option != null" >
+        option = #{record.option,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dstIp != null" >
+        dst_ip = #{record.dstIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.srcIp != null" >
+        src_ip = #{record.srcIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ident != null" >
+        ident = #{record.ident,jdbcType=INTEGER},
+      </if>
+      <if test="record.protocol != null" >
+        protocol = #{record.protocol,jdbcType=INTEGER},
+      </if>
+      <if test="record.hopLimit != null" >
+        hop_limit = #{record.hopLimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.offset != null" >
+        offset = #{record.offset,jdbcType=INTEGER},
+      </if>
+      <if test="record.moreFrag != null" >
+        more_frag = #{record.moreFrag,jdbcType=BIT},
+      </if>
+      <if test="record.dontFrag != null" >
+        dont_frag = #{record.dontFrag,jdbcType=BIT},
+      </if>
+      <if test="record.sortId != null" >
+        sort_id = #{record.sortId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ipv4
+    set id = #{record.id,jdbcType=INTEGER},
+      version = #{record.version,jdbcType=INTEGER},
+      priority = #{record.priority,jdbcType=INTEGER},
+      rsv_tos = #{record.rsvTos,jdbcType=INTEGER},
+      length = #{record.length,jdbcType=INTEGER},
+      option = #{record.option,jdbcType=VARCHAR},
+      dst_ip = #{record.dstIp,jdbcType=VARCHAR},
+      src_ip = #{record.srcIp,jdbcType=VARCHAR},
+      ident = #{record.ident,jdbcType=INTEGER},
+      protocol = #{record.protocol,jdbcType=INTEGER},
+      hop_limit = #{record.hopLimit,jdbcType=INTEGER},
+      offset = #{record.offset,jdbcType=INTEGER},
+      more_frag = #{record.moreFrag,jdbcType=BIT},
+      dont_frag = #{record.dontFrag,jdbcType=BIT},
+      sort_id = #{record.sortId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.IPV4" >
+    update ipv4
+    <set >
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null" >
+        priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="rsvTos != null" >
+        rsv_tos = #{rsvTos,jdbcType=INTEGER},
+      </if>
+      <if test="length != null" >
+        length = #{length,jdbcType=INTEGER},
+      </if>
+      <if test="option != null" >
+        option = #{option,jdbcType=VARCHAR},
+      </if>
+      <if test="dstIp != null" >
+        dst_ip = #{dstIp,jdbcType=VARCHAR},
+      </if>
+      <if test="srcIp != null" >
+        src_ip = #{srcIp,jdbcType=VARCHAR},
+      </if>
+      <if test="ident != null" >
+        ident = #{ident,jdbcType=INTEGER},
+      </if>
+      <if test="protocol != null" >
+        protocol = #{protocol,jdbcType=INTEGER},
+      </if>
+      <if test="hopLimit != null" >
+        hop_limit = #{hopLimit,jdbcType=INTEGER},
+      </if>
+      <if test="offset != null" >
+        offset = #{offset,jdbcType=INTEGER},
+      </if>
+      <if test="moreFrag != null" >
+        more_frag = #{moreFrag,jdbcType=BIT},
+      </if>
+      <if test="dontFrag != null" >
+        dont_frag = #{dontFrag,jdbcType=BIT},
+      </if>
+      <if test="sortId != null" >
+        sort_id = #{sortId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.IPV4" >
+    update ipv4
+    set version = #{version,jdbcType=INTEGER},
+      priority = #{priority,jdbcType=INTEGER},
+      rsv_tos = #{rsvTos,jdbcType=INTEGER},
+      length = #{length,jdbcType=INTEGER},
+      option = #{option,jdbcType=VARCHAR},
+      dst_ip = #{dstIp,jdbcType=VARCHAR},
+      src_ip = #{srcIp,jdbcType=VARCHAR},
+      ident = #{ident,jdbcType=INTEGER},
+      protocol = #{protocol,jdbcType=INTEGER},
+      hop_limit = #{hopLimit,jdbcType=INTEGER},
+      offset = #{offset,jdbcType=INTEGER},
+      more_frag = #{moreFrag,jdbcType=BIT},
+      dont_frag = #{dontFrag,jdbcType=BIT},
+      sort_id = #{sortId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

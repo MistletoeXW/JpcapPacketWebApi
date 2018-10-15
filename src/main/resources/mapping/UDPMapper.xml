@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.UDPMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.UDP" >
+    <result column="src_port" property="srcPort" jdbcType="INTEGER" />
+    <result column="dst_port" property="dstPort" jdbcType="INTEGER" />
+    <result column="length" property="length" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    src_port, dst_port, length
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.demo.entity.UDPExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from udp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.example.demo.entity.UDPExample" >
+    delete from udp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.entity.UDP" >
+    insert into udp (src_port, dst_port, length
+      )
+    values (#{srcPort,jdbcType=INTEGER}, #{dstPort,jdbcType=INTEGER}, #{length,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.UDP" >
+    insert into udp
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="srcPort != null" >
+        src_port,
+      </if>
+      <if test="dstPort != null" >
+        dst_port,
+      </if>
+      <if test="length != null" >
+        length,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="srcPort != null" >
+        #{srcPort,jdbcType=INTEGER},
+      </if>
+      <if test="dstPort != null" >
+        #{dstPort,jdbcType=INTEGER},
+      </if>
+      <if test="length != null" >
+        #{length,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.demo.entity.UDPExample" resultType="java.lang.Integer" >
+    select count(*) from udp
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update udp
+    <set >
+      <if test="record.srcPort != null" >
+        src_port = #{record.srcPort,jdbcType=INTEGER},
+      </if>
+      <if test="record.dstPort != null" >
+        dst_port = #{record.dstPort,jdbcType=INTEGER},
+      </if>
+      <if test="record.length != null" >
+        length = #{record.length,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update udp
+    set src_port = #{record.srcPort,jdbcType=INTEGER},
+      dst_port = #{record.dstPort,jdbcType=INTEGER},
+      length = #{record.length,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,19 @@
+server:
+  servlet:
+    context-path: /api
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: xxxxxxx
+    url: jdbc:mysql://118.25.130.89:3306/jpcap?characterEncoding=utf-8&useSSL=true
+  devtools:
+    restart:
+      additional-paths: ./src/main
+      enabled: true
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.web.machineversion.entity
