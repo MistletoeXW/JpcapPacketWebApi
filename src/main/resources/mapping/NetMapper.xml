@@ -89,9 +89,8 @@
     from network
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteAll" >
     delete from network
-    where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.example.demo.entity.NetExample" >
     delete from network
@@ -99,6 +98,9 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+  <update id="auto">
+   ALTER TABLE network auto_increment=1
+ </update>
   <insert id="insert" parameterType="com.example.demo.entity.Net" >
     insert into network (id, name, address, 
       other_address)

@@ -10,7 +10,8 @@ public interface ARPMapper {
 
     int deleteByExample(ARPExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteAll();
+    int auto();
 
     int insert(ARP record);
 

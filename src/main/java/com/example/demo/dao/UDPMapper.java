@@ -10,13 +10,22 @@ public interface UDPMapper {
 
     int deleteByExample(UDPExample example);
 
+    int deleteAll();
+    int auto();
+
     int insert(UDP record);
 
     int insertSelective(UDP record);
 
     List<UDP> selectByExample(UDPExample example);
 
+    UDP selectByPrimaryKey(Integer id);
+
     int updateByExampleSelective(@Param("record") UDP record, @Param("example") UDPExample example);
 
     int updateByExample(@Param("record") UDP record, @Param("example") UDPExample example);
+
+    int updateByPrimaryKeySelective(UDP record);
+
+    int updateByPrimaryKey(UDP record);
 }

@@ -23,7 +23,9 @@ public class TCP {
 
     private Integer urgentPointer;
 
-    private String option;
+    private String data;
+
+    private Integer sortId;
 
     public Integer getId() {
         return id;
@@ -113,11 +115,19 @@ public class TCP {
         this.urgentPointer = urgentPointer;
     }
 
-    public String getOption() {
-        return option;
+    public String getData() {
+        return data;
     }
 
-    public void setOption(String option) {
-        this.option = option == null ? null : option.trim();
+    public void setData(String data) {
+        this.data = data == null ? null : data.trim();
+    }
+
+    public Integer getSortId() {
+        return sortId;
+    }
+
+    public void setSortId(Integer sortId) {
+        this.sortId = sortId;
     }
 }

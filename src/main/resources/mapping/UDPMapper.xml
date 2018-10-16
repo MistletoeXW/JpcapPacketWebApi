@@ -2,9 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.example.demo.dao.UDPMapper" >
   <resultMap id="BaseResultMap" type="com.example.demo.entity.UDP" >
+    <id column="id" property="id" jdbcType="INTEGER" />
     <result column="src_port" property="srcPort" jdbcType="INTEGER" />
     <result column="dst_port" property="dstPort" jdbcType="INTEGER" />
     <result column="length" property="length" jdbcType="INTEGER" />
+    <result column="sort_id" property="sortId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    src_port, dst_port, length
+    id, src_port, dst_port, length, sort_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.demo.entity.UDPExample" >
     select
@@ -82,21 +84,36 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from udp
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteAll" >
+    delete from udp
+  </delete>
   <delete id="deleteByExample" parameterType="com.example.demo.entity.UDPExample" >
     delete from udp
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+  <update id="auto">
+   ALTER TABLE udp auto_increment=1
+ </update>
   <insert id="insert" parameterType="com.example.demo.entity.UDP" >
-    insert into udp (src_port, dst_port, length
-      )
-    values (#{srcPort,jdbcType=INTEGER}, #{dstPort,jdbcType=INTEGER}, #{length,jdbcType=INTEGER}
-      )
+    insert into udp (id, src_port, dst_port, 
+      length, sort_id)
+    values (#{id,jdbcType=INTEGER}, #{srcPort,jdbcType=INTEGER}, #{dstPort,jdbcType=INTEGER}, 
+      #{length,jdbcType=INTEGER}, #{sortId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.entity.UDP" >
     insert into udp
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
       <if test="srcPort != null" >
         src_port,
       </if>
@@ -106,8 +123,14 @@
       <if test="length != null" >
         length,
       </if>
+      <if test="sortId != null" >
+        sort_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
       <if test="srcPort != null" >
         #{srcPort,jdbcType=INTEGER},
       </if>
@@ -116,6 +139,9 @@
       </if>
       <if test="length != null" >
         #{length,jdbcType=INTEGER},
+      </if>
+      <if test="sortId != null" >
+        #{sortId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -128,6 +154,9 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update udp
     <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
       <if test="record.srcPort != null" >
         src_port = #{record.srcPort,jdbcType=INTEGER},
       </if>
@@ -137,6 +166,9 @@
       <if test="record.length != null" >
         length = #{record.length,jdbcType=INTEGER},
       </if>
+      <if test="record.sortId != null" >
+        sort_id = #{record.sortId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -144,11 +176,39 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update udp
-    set src_port = #{record.srcPort,jdbcType=INTEGER},
+    set id = #{record.id,jdbcType=INTEGER},
+      src_port = #{record.srcPort,jdbcType=INTEGER},
       dst_port = #{record.dstPort,jdbcType=INTEGER},
-      length = #{record.length,jdbcType=INTEGER}
+      length = #{record.length,jdbcType=INTEGER},
+      sort_id = #{record.sortId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.entity.UDP" >
+    update udp
+    <set >
+      <if test="srcPort != null" >
+        src_port = #{srcPort,jdbcType=INTEGER},
+      </if>
+      <if test="dstPort != null" >
+        dst_port = #{dstPort,jdbcType=INTEGER},
+      </if>
+      <if test="length != null" >
+        length = #{length,jdbcType=INTEGER},
+      </if>
+      <if test="sortId != null" >
+        sort_id = #{sortId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.UDP" >
+    update udp
+    set src_port = #{srcPort,jdbcType=INTEGER},
+      dst_port = #{dstPort,jdbcType=INTEGER},
+      length = #{length,jdbcType=INTEGER},
+      sort_id = #{sortId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -101,9 +101,8 @@
     from ipv4
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteAll" >
     delete from ipv4
-    where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.example.demo.entity.IPV4Example" >
     delete from ipv4
@@ -111,6 +110,9 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+ <update id="auto">
+   ALTER TABLE ipv4 auto_increment=1
+ </update>
   <insert id="insert" parameterType="com.example.demo.entity.IPV4" >
     insert into ipv4 (id, version, priority, 
       rsv_tos, length, option, 

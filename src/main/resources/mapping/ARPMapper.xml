@@ -7,7 +7,7 @@
     <result column="target_hardaddr" property="targetHardaddr" jdbcType="VARCHAR" />
     <result column="sender_protoaddr" property="senderProtoaddr" jdbcType="VARCHAR" />
     <result column="sender_hardaddr" property="senderHardaddr" jdbcType="VARCHAR" />
-    <result column="operation" property="operation" jdbcType="VARCHAR" />
+    <result column="operation" property="operation" jdbcType="INTEGER" />
     <result column="plen" property="plen" jdbcType="INTEGER" />
     <result column="hlen" property="hlen" jdbcType="INTEGER" />
     <result column="prototype" property="prototype" jdbcType="INTEGER" />
@@ -96,10 +96,12 @@
     from arp
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteAll">
     delete from arp
-    where id = #{id,jdbcType=INTEGER}
   </delete>
+  <update id="auto">
+   ALTER TABLE arp auto_increment=1
+ </update>
   <delete id="deleteByExample" parameterType="com.example.demo.entity.ARPExample" >
     delete from arp
     <if test="_parameter != null" >
@@ -112,7 +114,7 @@
       plen, hlen, prototype, 
       hardtype)
     values (#{id,jdbcType=INTEGER}, #{targetProtoaddr,jdbcType=VARCHAR}, #{targetHardaddr,jdbcType=VARCHAR}, 
-      #{senderProtoaddr,jdbcType=VARCHAR}, #{senderHardaddr,jdbcType=VARCHAR}, #{operation,jdbcType=VARCHAR}, 
+      #{senderProtoaddr,jdbcType=VARCHAR}, #{senderHardaddr,jdbcType=VARCHAR}, #{operation,jdbcType=INTEGER}, 
       #{plen,jdbcType=INTEGER}, #{hlen,jdbcType=INTEGER}, #{prototype,jdbcType=INTEGER}, 
       #{hardtype,jdbcType=INTEGER})
   </insert>
@@ -167,7 +169,7 @@
         #{senderHardaddr,jdbcType=VARCHAR},
       </if>
       <if test="operation != null" >
-        #{operation,jdbcType=VARCHAR},
+        #{operation,jdbcType=INTEGER},
       </if>
       <if test="plen != null" >
         #{plen,jdbcType=INTEGER},
@@ -208,7 +210,7 @@
         sender_hardaddr = #{record.senderHardaddr,jdbcType=VARCHAR},
       </if>
       <if test="record.operation != null" >
-        operation = #{record.operation,jdbcType=VARCHAR},
+        operation = #{record.operation,jdbcType=INTEGER},
       </if>
       <if test="record.plen != null" >
         plen = #{record.plen,jdbcType=INTEGER},
@@ -234,7 +236,7 @@
       target_hardaddr = #{record.targetHardaddr,jdbcType=VARCHAR},
       sender_protoaddr = #{record.senderProtoaddr,jdbcType=VARCHAR},
       sender_hardaddr = #{record.senderHardaddr,jdbcType=VARCHAR},
-      operation = #{record.operation,jdbcType=VARCHAR},
+      operation = #{record.operation,jdbcType=INTEGER},
       plen = #{record.plen,jdbcType=INTEGER},
       hlen = #{record.hlen,jdbcType=INTEGER},
       prototype = #{record.prototype,jdbcType=INTEGER},
@@ -259,7 +261,7 @@
         sender_hardaddr = #{senderHardaddr,jdbcType=VARCHAR},
       </if>
       <if test="operation != null" >
-        operation = #{operation,jdbcType=VARCHAR},
+        operation = #{operation,jdbcType=INTEGER},
       </if>
       <if test="plen != null" >
         plen = #{plen,jdbcType=INTEGER},
@@ -282,7 +284,7 @@
       target_hardaddr = #{targetHardaddr,jdbcType=VARCHAR},
       sender_protoaddr = #{senderProtoaddr,jdbcType=VARCHAR},
       sender_hardaddr = #{senderHardaddr,jdbcType=VARCHAR},
-      operation = #{operation,jdbcType=VARCHAR},
+      operation = #{operation,jdbcType=INTEGER},
       plen = #{plen,jdbcType=INTEGER},
       hlen = #{hlen,jdbcType=INTEGER},
       prototype = #{prototype,jdbcType=INTEGER},

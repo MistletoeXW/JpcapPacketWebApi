@@ -454,62 +454,52 @@ public class ARPExample {
             return (Criteria) this;
         }
 
-        public Criteria andOperationEqualTo(String value) {
+        public Criteria andOperationEqualTo(Integer value) {
             addCriterion("operation =", value, "operation");
             return (Criteria) this;
         }
 
-        public Criteria andOperationNotEqualTo(String value) {
+        public Criteria andOperationNotEqualTo(Integer value) {
             addCriterion("operation <>", value, "operation");
             return (Criteria) this;
         }
 
-        public Criteria andOperationGreaterThan(String value) {
+        public Criteria andOperationGreaterThan(Integer value) {
             addCriterion("operation >", value, "operation");
             return (Criteria) this;
         }
 
-        public Criteria andOperationGreaterThanOrEqualTo(String value) {
+        public Criteria andOperationGreaterThanOrEqualTo(Integer value) {
             addCriterion("operation >=", value, "operation");
             return (Criteria) this;
         }
 
-        public Criteria andOperationLessThan(String value) {
+        public Criteria andOperationLessThan(Integer value) {
             addCriterion("operation <", value, "operation");
             return (Criteria) this;
         }
 
-        public Criteria andOperationLessThanOrEqualTo(String value) {
+        public Criteria andOperationLessThanOrEqualTo(Integer value) {
             addCriterion("operation <=", value, "operation");
             return (Criteria) this;
         }
 
-        public Criteria andOperationLike(String value) {
-            addCriterion("operation like", value, "operation");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperationNotLike(String value) {
-            addCriterion("operation not like", value, "operation");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperationIn(List<String> values) {
+        public Criteria andOperationIn(List<Integer> values) {
             addCriterion("operation in", values, "operation");
             return (Criteria) this;
         }
 
-        public Criteria andOperationNotIn(List<String> values) {
+        public Criteria andOperationNotIn(List<Integer> values) {
             addCriterion("operation not in", values, "operation");
             return (Criteria) this;
         }
 
-        public Criteria andOperationBetween(String value1, String value2) {
+        public Criteria andOperationBetween(Integer value1, Integer value2) {
             addCriterion("operation between", value1, value2, "operation");
             return (Criteria) this;
         }
 
-        public Criteria andOperationNotBetween(String value1, String value2) {
+        public Criteria andOperationNotBetween(Integer value1, Integer value2) {
             addCriterion("operation not between", value1, value2, "operation");
             return (Criteria) this;
         }

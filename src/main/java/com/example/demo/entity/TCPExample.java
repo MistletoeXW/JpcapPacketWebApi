@@ -764,73 +764,133 @@ public class TCPExample {
             return (Criteria) this;
         }
 
-        public Criteria andOptionIsNull() {
-            addCriterion("option is null");
+        public Criteria andDataIsNull() {
+            addCriterion("data is null");
             return (Criteria) this;
         }
 
-        public Criteria andOptionIsNotNull() {
-            addCriterion("option is not null");
+        public Criteria andDataIsNotNull() {
+            addCriterion("data is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOptionEqualTo(String value) {
-            addCriterion("option =", value, "option");
+        public Criteria andDataEqualTo(String value) {
+            addCriterion("data =", value, "data");
             return (Criteria) this;
         }
 
-        public Criteria andOptionNotEqualTo(String value) {
-            addCriterion("option <>", value, "option");
+        public Criteria andDataNotEqualTo(String value) {
+            addCriterion("data <>", value, "data");
             return (Criteria) this;
         }
 
-        public Criteria andOptionGreaterThan(String value) {
-            addCriterion("option >", value, "option");
+        public Criteria andDataGreaterThan(String value) {
+            addCriterion("data >", value, "data");
             return (Criteria) this;
         }
 
-        public Criteria andOptionGreaterThanOrEqualTo(String value) {
-            addCriterion("option >=", value, "option");
+        public Criteria andDataGreaterThanOrEqualTo(String value) {
+            addCriterion("data >=", value, "data");
             return (Criteria) this;
         }
 
-        public Criteria andOptionLessThan(String value) {
-            addCriterion("option <", value, "option");
+        public Criteria andDataLessThan(String value) {
+            addCriterion("data <", value, "data");
             return (Criteria) this;
         }
 
-        public Criteria andOptionLessThanOrEqualTo(String value) {
-            addCriterion("option <=", value, "option");
+        public Criteria andDataLessThanOrEqualTo(String value) {
+            addCriterion("data <=", value, "data");
             return (Criteria) this;
         }
 
-        public Criteria andOptionLike(String value) {
-            addCriterion("option like", value, "option");
+        public Criteria andDataLike(String value) {
+            addCriterion("data like", value, "data");
             return (Criteria) this;
         }
 
-        public Criteria andOptionNotLike(String value) {
-            addCriterion("option not like", value, "option");
+        public Criteria andDataNotLike(String value) {
+            addCriterion("data not like", value, "data");
             return (Criteria) this;
         }
 
-        public Criteria andOptionIn(List<String> values) {
-            addCriterion("option in", values, "option");
+        public Criteria andDataIn(List<String> values) {
+            addCriterion("data in", values, "data");
             return (Criteria) this;
         }
 
-        public Criteria andOptionNotIn(List<String> values) {
-            addCriterion("option not in", values, "option");
+        public Criteria andDataNotIn(List<String> values) {
+            addCriterion("data not in", values, "data");
             return (Criteria) this;
         }
 
-        public Criteria andOptionBetween(String value1, String value2) {
-            addCriterion("option between", value1, value2, "option");
+        public Criteria andDataBetween(String value1, String value2) {
+            addCriterion("data between", value1, value2, "data");
             return (Criteria) this;
         }
 
-        public Criteria andOptionNotBetween(String value1, String value2) {
-            addCriterion("option not between", value1, value2, "option");
+        public Criteria andDataNotBetween(String value1, String value2) {
+            addCriterion("data not between", value1, value2, "data");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdIsNull() {
+            addCriterion("sort_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdIsNotNull() {
+            addCriterion("sort_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdEqualTo(Integer value) {
+            addCriterion("sort_id =", value, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdNotEqualTo(Integer value) {
+            addCriterion("sort_id <>", value, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdGreaterThan(Integer value) {
+            addCriterion("sort_id >", value, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sort_id >=", value, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdLessThan(Integer value) {
+            addCriterion("sort_id <", value, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdLessThanOrEqualTo(Integer value) {
+            addCriterion("sort_id <=", value, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdIn(List<Integer> values) {
+            addCriterion("sort_id in", values, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdNotIn(List<Integer> values) {
+            addCriterion("sort_id not in", values, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdBetween(Integer value1, Integer value2) {
+            addCriterion("sort_id between", value1, value2, "sortId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSortIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("sort_id not between", value1, value2, "sortId");
             return (Criteria) this;
         }
     }

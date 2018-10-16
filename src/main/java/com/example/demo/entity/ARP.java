@@ -11,7 +11,7 @@ public class ARP {
 
     private String senderHardaddr;
 
-    private String operation;
+    private Integer operation;
 
     private Integer plen;
 
@@ -61,12 +61,12 @@ public class ARP {
         this.senderHardaddr = senderHardaddr == null ? null : senderHardaddr.trim();
     }
 
-    public String getOperation() {
+    public Integer getOperation() {
         return operation;
     }
 
-    public void setOperation(String operation) {
-        this.operation = operation == null ? null : operation.trim();
+    public void setOperation(Integer operation) {
+        this.operation = operation;
     }
 
     public Integer getPlen() {

@@ -10,7 +10,9 @@ public interface NetMapper {
 
     int deleteByExample(NetExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteAll();
+
+    int auto();
 
     int insert(Net record);
 

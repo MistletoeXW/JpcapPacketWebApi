@@ -10,7 +10,9 @@ public interface IPV4Mapper {
 
     int deleteByExample(IPV4Example example);
 
-    int deleteByPrimaryKey(Integer id);
+
+    int deleteAll();
+    int auto();
 
     int insert(IPV4 record);
 

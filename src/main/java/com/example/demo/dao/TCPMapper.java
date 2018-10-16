@@ -2,7 +2,6 @@ package com.example.demo.dao;
 
 import com.example.demo.entity.TCP;
 import com.example.demo.entity.TCPExample;
-import com.example.demo.entity.TCPWithBLOBs;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -11,27 +10,23 @@ public interface TCPMapper {
 
     int deleteByExample(TCPExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteAll();
 
-    int insert(TCPWithBLOBs record);
+    int auto();
 
-    int insertSelective(TCPWithBLOBs record);
+    int insert(TCP record);
 
-    List<TCPWithBLOBs> selectByExampleWithBLOBs(TCPExample example);
+    int insertSelective(TCP record);
 
     List<TCP> selectByExample(TCPExample example);
 
-    TCPWithBLOBs selectByPrimaryKey(Integer id);
+    TCP selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") TCPWithBLOBs record, @Param("example") TCPExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") TCPWithBLOBs record, @Param("example") TCPExample example);
+    int updateByExampleSelective(@Param("record") TCP record, @Param("example") TCPExample example);
 
     int updateByExample(@Param("record") TCP record, @Param("example") TCPExample example);
 
-    int updateByPrimaryKeySelective(TCPWithBLOBs record);
-
-    int updateByPrimaryKeyWithBLOBs(TCPWithBLOBs record);
+    int updateByPrimaryKeySelective(TCP record);
 
     int updateByPrimaryKey(TCP record);
 }
