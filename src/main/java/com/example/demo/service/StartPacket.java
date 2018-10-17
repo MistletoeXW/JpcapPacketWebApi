@@ -12,6 +12,7 @@ import jpcap.packet.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 
 @Service
 public class StartPacket {
@@ -131,24 +132,41 @@ public class StartPacket {
                         if (data.length == 0) {
                             tcp.setData("Don`t have data!");
                         } else {
-                            try {
-                                //接受HTTP回应
-                                String str = new String(BytesToHexString(data));
-                                if(str.equals(new String(str.getBytes("UTF-8"),"UTF-8")))
+                            if (tPacket.src_port == 80) {                 //接受HTTP回应
+                                String str = null;
+                                try {
+                                    String str1 = new String(data);
+                                    if (str1.contains("HTTP/1.1")) {
+                                        str = str1;
+                                    } else {
+                                        String str2 = new String(data, "GB2312");
+                                        if (str2.contains("HTTP/1.1")) {
+                                            str = str2;
+                                        } else {
+                                            String str3 = new String(data, "GBK");
+                                            if (str3.contains("HTTP/1.1")) {
+                                                str = str3;
+                                            } else {
+                                                str = new String(data, "Unicode");
+                                            }
+                                        }
+                                    }
                                     tcp.setData(str);
-                                else
-                                    tcp.setData("code error!");
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            if (tPacket.dst_port == 80) {
+                                try {
+                                    String str = new String(data, "ASCII");
+                                    tcp.setData(str);
+                                } catch (Exception e) {
+                                    // TODO: handle exception
+                                }
                             }
                         }
-                    }else{
-                        tcp.setData("Don`t have data!");
                     }
-
                     tcpMapper.insertSelective(tcp);
-                    }
                     this.id = this.id + 1;
                 }
 
@@ -166,9 +184,10 @@ public class StartPacket {
                     arp.setTargetProtoaddr(BytesToHexString(aPacket.target_protoaddr));//目标协议地址
                     arpMapper.insertSelective(arp);
                 }
-        }catch(Exception e){
-            e.printStackTrace();
+            }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
     }
-}
 

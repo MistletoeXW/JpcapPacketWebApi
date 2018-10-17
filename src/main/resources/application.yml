@@ -1,14 +1,14 @@
 server:
   servlet:
     context-path: /api
-  port: 8080
+  port: 8081
 
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 52655384
-    url: jdbc:mysql://118.25.130.89:3306/jpcap?characterEncoding=utf-8&useSSL=true
+    url: jdbc:mysql://118.25.130.89:3306/jpcap?useSSL=true
   devtools:
     restart:
       additional-paths: ./src/main
