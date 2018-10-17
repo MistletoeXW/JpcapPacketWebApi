@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.OV.Result;
 import com.example.demo.OV.ResultTool;
+import com.example.demo.OV.countResponse;
 import com.example.demo.dao.ARPMapper;
 import com.example.demo.dao.IPV4Mapper;
 import com.example.demo.dao.TCPMapper;
@@ -28,8 +29,21 @@ public class QueryPacketService {
         try{
             IPV4Example example = new IPV4Example();
             example.createCriteria()
-                    .andIdIsNotNull();
-            List<IPV4> list = ipv4Mapper.selectByExample(example);
+                    .andSortIdIsNotNull();
+            result = ResultTool.success(ipv4Mapper.selectByExample(example));
+        }catch (Exception e){
+            result = ResultTool.error("Query error!");
+        }
+        return result;
+    }
+
+    public Result getTCP(Integer id){
+        Result result = new Result();
+        try{
+            TCPExample example = new TCPExample();
+            example.createCriteria()
+                    .andSortIdEqualTo(id);
+            List<TCP> list = tcpMapper.selectByExample(example);
             result = ResultTool.success(list);
         }catch (Exception e){
             result = ResultTool.error("Query error!");
@@ -43,7 +57,20 @@ public class QueryPacketService {
             TCPExample example = new TCPExample();
             example.createCriteria()
                     .andIdIsNotNull();
-            List<TCP> list = tcpMapper.selectByExample(example);
+            result = ResultTool.success(tcpMapper.selectByExample(example));
+        }catch (Exception e){
+            result = ResultTool.error("Query error!");
+        }
+        return result;
+    }
+
+    public Result getUDP(Integer id){
+        Result result = new Result();
+        try{
+            UDPExample example = new UDPExample();
+            example.createCriteria()
+                    .andSortIdEqualTo(id);
+            List<UDP> list = udpMapper.selectByExample(example);
             result = ResultTool.success(list);
         }catch (Exception e){
             result = ResultTool.error("Query error!");
@@ -57,8 +84,7 @@ public class QueryPacketService {
             UDPExample example = new UDPExample();
             example.createCriteria()
                     .andIdIsNotNull();
-            List<UDP> list = udpMapper.selectByExample(example);
-            result = ResultTool.success(list);
+            result = ResultTool.success(udpMapper.selectByExample(example));
         }catch (Exception e){
             result = ResultTool.error("Query error!");
         }
@@ -75,6 +101,37 @@ public class QueryPacketService {
             result = ResultTool.success(list);
         }catch (Exception e){
             result = ResultTool.error("Query error!");
+        }
+        return result;
+    }
+
+    public Result getCount(){
+        Result result = new Result();
+        countResponse countresponse = new countResponse();
+        try{
+            IPV4Example ipv4Example = new IPV4Example();
+            ipv4Example.createCriteria()
+                    .andIdIsNotNull();
+            countresponse.setIpv4(ipv4Mapper.countByExample(ipv4Example));
+
+            TCPExample tcpExample = new TCPExample();
+            tcpExample.createCriteria()
+                    .andIdIsNotNull();
+            countresponse.setTcp(tcpMapper.countByExample(tcpExample));
+
+            UDPExample udpExample = new UDPExample();
+            udpExample.createCriteria()
+                    .andIdIsNotNull();
+            countresponse.setUdp(udpMapper.countByExample(udpExample));
+
+            ARPExample arpExample = new ARPExample();
+            arpExample.createCriteria()
+                    .andIdIsNotNull();
+            countresponse.setArp(arpMapper.countByExample(arpExample));
+
+            result = ResultTool.success(countresponse);
+        }catch (Exception e){
+            result = ResultTool.error("error!");
         }
         return result;
     }

@@ -41,13 +41,13 @@
                <!--enableSelectByExample="true"-->
                <!--selectByExampleQueryId="true"-->
         <!--/>-->
-        <!--<table tableName="ipv4" domainObjectName="IPV4"-->
-               <!--enableCountByExample="true"-->
-               <!--enableUpdateByExample="true"-->
-               <!--enableDeleteByExample="true"-->
-               <!--enableSelectByExample="true"-->
-               <!--selectByExampleQueryId="true"-->
-        <!--/>-->
+        <table tableName="ipv4" domainObjectName="IPV4"
+               enableCountByExample="true"
+               enableUpdateByExample="true"
+               enableDeleteByExample="true"
+               enableSelectByExample="true"
+               selectByExampleQueryId="true"
+        />
         <!--<table tableName="network" domainObjectName="Net"-->
                <!--enableCountByExample="true"-->
                <!--enableUpdateByExample="true"-->
@@ -55,13 +55,13 @@
                <!--enableSelectByExample="true"-->
                <!--selectByExampleQueryId="true"-->
         <!--/>-->
-        <table tableName="tcp" domainObjectName="TCP"
-               enableCountByExample="true"
-               enableUpdateByExample="true"
-               enableDeleteByExample="true"
-               enableSelectByExample="true"
-               selectByExampleQueryId="true"
-        />
+        <!--<table tableName="tcp" domainObjectName="TCP"-->
+               <!--enableCountByExample="true"-->
+               <!--enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true"-->
+               <!--enableSelectByExample="true"-->
+               <!--selectByExampleQueryId="true"-->
+        <!--/>-->
 
         <!--<table tableName="udp" domainObjectName="UDP"-->
                <!--enableCountByExample="true"-->

@@ -11,8 +11,6 @@ public class IPV4 {
 
     private Integer length;
 
-    private String option;
-
     private String dstIp;
 
     private String srcIp;
@@ -69,14 +67,6 @@ public class IPV4 {
 
     public void setLength(Integer length) {
         this.length = length;
-    }
-
-    public String getOption() {
-        return option;
-    }
-
-    public void setOption(String option) {
-        this.option = option == null ? null : option.trim();
     }
 
     public String getDstIp() {

@@ -7,7 +7,6 @@
     <result column="priority" property="priority" jdbcType="INTEGER" />
     <result column="rsv_tos" property="rsvTos" jdbcType="INTEGER" />
     <result column="length" property="length" jdbcType="INTEGER" />
-    <result column="option" property="option" jdbcType="VARCHAR" />
     <result column="dst_ip" property="dstIp" jdbcType="VARCHAR" />
     <result column="src_ip" property="srcIp" jdbcType="VARCHAR" />
     <result column="ident" property="ident" jdbcType="INTEGER" />
@@ -77,8 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, version, priority, rsv_tos, length, option, dst_ip, src_ip, ident, protocol, 
-    hop_limit, offset, more_frag, dont_frag, sort_id
+    id, version, priority, rsv_tos, length, dst_ip, src_ip, ident, protocol, hop_limit, 
+    offset, more_frag, dont_frag, sort_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.demo.entity.IPV4Example" >
     select
@@ -104,26 +103,26 @@
   <delete id="deleteAll" >
     delete from ipv4
   </delete>
+  <update id="auto">
+   ALTER TABLE ipv4 auto_increment=1
+  </update>
   <delete id="deleteByExample" parameterType="com.example.demo.entity.IPV4Example" >
     delete from ipv4
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
- <update id="auto">
-   ALTER TABLE ipv4 auto_increment=1
- </update>
   <insert id="insert" parameterType="com.example.demo.entity.IPV4" >
     insert into ipv4 (id, version, priority, 
-      rsv_tos, length, option, 
-      dst_ip, src_ip, ident, 
-      protocol, hop_limit, offset, 
-      more_frag, dont_frag, sort_id)
+      rsv_tos, length, dst_ip, 
+      src_ip, ident, protocol, 
+      hop_limit, offset, more_frag, 
+      dont_frag, sort_id)
     values (#{id,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{priority,jdbcType=INTEGER}, 
-      #{rsvTos,jdbcType=INTEGER}, #{length,jdbcType=INTEGER}, #{option,jdbcType=VARCHAR}, 
-      #{dstIp,jdbcType=VARCHAR}, #{srcIp,jdbcType=VARCHAR}, #{ident,jdbcType=INTEGER}, 
-      #{protocol,jdbcType=INTEGER}, #{hopLimit,jdbcType=INTEGER}, #{offset,jdbcType=INTEGER}, 
-      #{moreFrag,jdbcType=BIT}, #{dontFrag,jdbcType=BIT}, #{sortId,jdbcType=INTEGER})
+      #{rsvTos,jdbcType=INTEGER}, #{length,jdbcType=INTEGER}, #{dstIp,jdbcType=VARCHAR}, 
+      #{srcIp,jdbcType=VARCHAR}, #{ident,jdbcType=INTEGER}, #{protocol,jdbcType=INTEGER}, 
+      #{hopLimit,jdbcType=INTEGER}, #{offset,jdbcType=INTEGER}, #{moreFrag,jdbcType=BIT}, 
+      #{dontFrag,jdbcType=BIT}, #{sortId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.entity.IPV4" >
     insert into ipv4
@@ -142,9 +141,6 @@
       </if>
       <if test="length != null" >
         length,
-      </if>
-      <if test="option != null" >
-        option,
       </if>
       <if test="dstIp != null" >
         dst_ip,
@@ -189,9 +185,6 @@
       </if>
       <if test="length != null" >
         #{length,jdbcType=INTEGER},
-      </if>
-      <if test="option != null" >
-        #{option,jdbcType=VARCHAR},
       </if>
       <if test="dstIp != null" >
         #{dstIp,jdbcType=VARCHAR},
@@ -246,9 +239,6 @@
       <if test="record.length != null" >
         length = #{record.length,jdbcType=INTEGER},
       </if>
-      <if test="record.option != null" >
-        option = #{record.option,jdbcType=VARCHAR},
-      </if>
       <if test="record.dstIp != null" >
         dst_ip = #{record.dstIp,jdbcType=VARCHAR},
       </if>
@@ -288,7 +278,6 @@
       priority = #{record.priority,jdbcType=INTEGER},
       rsv_tos = #{record.rsvTos,jdbcType=INTEGER},
       length = #{record.length,jdbcType=INTEGER},
-      option = #{record.option,jdbcType=VARCHAR},
       dst_ip = #{record.dstIp,jdbcType=VARCHAR},
       src_ip = #{record.srcIp,jdbcType=VARCHAR},
       ident = #{record.ident,jdbcType=INTEGER},
@@ -316,9 +305,6 @@
       </if>
       <if test="length != null" >
         length = #{length,jdbcType=INTEGER},
-      </if>
-      <if test="option != null" >
-        option = #{option,jdbcType=VARCHAR},
       </if>
       <if test="dstIp != null" >
         dst_ip = #{dstIp,jdbcType=VARCHAR},
@@ -356,7 +342,6 @@
       priority = #{priority,jdbcType=INTEGER},
       rsv_tos = #{rsvTos,jdbcType=INTEGER},
       length = #{length,jdbcType=INTEGER},
-      option = #{option,jdbcType=VARCHAR},
       dst_ip = #{dstIp,jdbcType=VARCHAR},
       src_ip = #{srcIp,jdbcType=VARCHAR},
       ident = #{ident,jdbcType=INTEGER},

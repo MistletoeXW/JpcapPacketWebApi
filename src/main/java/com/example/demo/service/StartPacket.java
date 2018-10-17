@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.controller.TaskHelperController;
 import com.example.demo.dao.ARPMapper;
 import com.example.demo.dao.IPV4Mapper;
 import com.example.demo.dao.TCPMapper;
@@ -39,6 +40,7 @@ public class StartPacket {
             }
             return hs.toUpperCase();
         }else{
+
             return null;
         }
 
@@ -60,7 +62,7 @@ public class StartPacket {
             udpMapper.deleteAll();
             udpMapper.auto();
             JpcapCaptor jpcap1 = JpcapCaptor.openDevice(nc, 2000, true, 20);
-            while(true){
+            while(TaskHelperController.stopFlag!=true){
                 Packet packet = jpcap1.getPacket();
                 this.receivePacket(packet);
             }
@@ -125,9 +127,9 @@ public class StartPacket {
                     tcp.setWindow(tPacket.window);      //窗口大小
                     tcp.setUrgentPointer((int) tPacket.urgent_pointer); //紧急指针
                     if (tPacket.src_port == 80 || tPacket.dst_port == 80) {//分析HTTP协议
-                        byte[] data = tPacket.data;
+                        byte[] data = packet.data;
                         if (data.length == 0) {
-                            tcp.setData("");
+                            tcp.setData("Don`t have data!");
                         } else {
                             try {
                                 //接受HTTP回应
@@ -142,7 +144,7 @@ public class StartPacket {
                             }
                         }
                     }else{
-                        tcp.setData("");
+                        tcp.setData("Don`t have data!");
                     }
 
                     tcpMapper.insertSelective(tcp);
